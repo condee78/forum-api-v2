@@ -28,6 +28,9 @@ const AddCommentUseCase = require("../Applications/use_case/AddCommentUseCase");
 const DeleteCommentUseCase = require("../Applications/use_case/DeleteCommentUseCase");
 const AddReplyCommentUseCase = require("../Applications/use_case/AddReplyCommentUseCase");
 const DeleteReplyCommentUseCase = require("../Applications/use_case/DeleteReplyCommentUseCase");
+const ThreadUseCase = require("../Applications/use_case/ThreadUseCase");
+const CommentUseCase = require("../Applications/use_case/CommentUseCase");
+const ReplyCommentUseCase = require("../Applications/use_case/ReplyCommentUseCase");
 
 const serviceInstanceContainer = {
   userRepository: new UserRepositoryPostgres(pool, nanoid),
@@ -53,6 +56,24 @@ const useCaseInstanceContainer = {
     threadRepository: serviceInstanceContainer.threadRepository,
     commentRepository: serviceInstanceContainer.commentRepository,
     replyCommentRepository: serviceInstanceContainer.replyCommentRepository,
+  }),
+  threadUseCase: new ThreadUseCase({
+    threadRepository: serviceInstanceContainer.threadRepository,
+    commentRepository: serviceInstanceContainer.commentRepository,
+    replyCommentRepository: serviceInstanceContainer.replyCommentRepository,
+  }),
+  commentUseCase: new CommentUseCase({
+    commentRepository: serviceInstanceContainer.commentRepository,
+    threadRepository: serviceInstanceContainer.threadRepository,
+    authenticationTokenManager:
+      serviceInstanceContainer.authenticationTokenManager,
+  }),
+  replyCommentUseCase: new ReplyCommentUseCase({
+    commentRepository: serviceInstanceContainer.commentRepository,
+    threadRepository: serviceInstanceContainer.threadRepository,
+    replyCommentRepository: serviceInstanceContainer.replyCommentRepository,
+    authenticationTokenManager:
+      serviceInstanceContainer.authenticationTokenManager,
   }),
   addCommentUseCase: new AddCommentUseCase({
     commentRepository: serviceInstanceContainer.commentRepository,

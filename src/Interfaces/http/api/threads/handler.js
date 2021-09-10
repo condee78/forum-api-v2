@@ -1,7 +1,6 @@
 class ThreadsHandler {
-  constructor({ addThreadUseCase, detailThreadUseCase }) {
-    this._addThreadUseCase = addThreadUseCase;
-    this._detailThreadUseCase = detailThreadUseCase;
+  constructor({ threadUseCase }) {
+    this._threadUseCase = threadUseCase;
 
     this.postThreadHandler = this.postThreadHandler.bind(this);
     this.getThreadHandler = this.getThreadHandler.bind(this);
@@ -9,7 +8,7 @@ class ThreadsHandler {
 
   async postThreadHandler(request, h) {
     // const { id: credentialId } = request.auth.credentials;
-    const addedThread = await this._addThreadUseCase.execute(
+    const addedThread = await this._threadUseCase.addThread(
       request.payload,
       request.auth.credentials
     );
@@ -25,7 +24,7 @@ class ThreadsHandler {
   }
 
   async getThreadHandler(request, h) {
-    const thread = await this._detailThreadUseCase.execute(request.params);
+    const thread = await this._threadUseCase.getThread(request.params);
 
     const response = h.response({
       status: "success",

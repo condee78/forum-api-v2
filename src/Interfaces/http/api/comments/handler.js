@@ -1,7 +1,6 @@
 class CommentsHandler {
-  constructor({ addCommentUseCase, deleteCommentUseCase }) {
-    this._addCommentUseCase = addCommentUseCase;
-    this._deleteCommentUseCase = deleteCommentUseCase;
+  constructor({ commentUseCase }) {
+    this._commentUseCase = commentUseCase;
 
     this.postCommentHandler = this.postCommentHandler.bind(this);
     this.deleteCommentHandler = this.deleteCommentHandler.bind(this);
@@ -9,7 +8,7 @@ class CommentsHandler {
 
   async postCommentHandler(request, h) {
     // const { id: credentialId } = request.auth.credentials;
-    const addedComment = await this._addCommentUseCase.execute(
+    const addedComment = await this._commentUseCase.addComment(
       request.payload,
       request.params,
       request.auth.credentials
@@ -27,7 +26,7 @@ class CommentsHandler {
 
   async deleteCommentHandler(request, h) {
     // const { id: credentialId } = request.auth.credentials;
-    await this._deleteCommentUseCase.execute(
+    await this._commentUseCase.deleteComment(
       request.params,
       request.auth.credentials
     );

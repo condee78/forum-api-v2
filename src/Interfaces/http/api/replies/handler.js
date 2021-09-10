@@ -1,7 +1,6 @@
 class RepliesHandler {
-  constructor({ addReplyCommentUseCase, deleteReplyCommentUseCase }) {
-    this._addReplyCommentUseCase = addReplyCommentUseCase;
-    this._deleteReplyCommentUseCase = deleteReplyCommentUseCase;
+  constructor({ replyCommentUseCase }) {
+    this._replyCommentUseCase = replyCommentUseCase;
 
     this.postReplyCommentHandler = this.postReplyCommentHandler.bind(this);
     this.deleteReplyCommentByIdHandler =
@@ -10,7 +9,7 @@ class RepliesHandler {
 
   async postReplyCommentHandler(request, h) {
     // const { id: credentialId } = request.auth.credentials;
-    const addedReply = await this._addReplyCommentUseCase.execute(
+    const addedReply = await this._replyCommentUseCase.addReplyComment(
       request.payload,
       request.params,
       request.auth.credentials
@@ -28,7 +27,7 @@ class RepliesHandler {
 
   async deleteReplyCommentByIdHandler(request, h) {
     // const { id: credentialId } = request.auth.credentials;
-    await this._deleteReplyCommentUseCase.execute(
+    await this._replyCommentUseCase.deleteReplyComment(
       request.params,
       request.auth.credentials
     );
