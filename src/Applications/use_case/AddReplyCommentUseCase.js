@@ -13,17 +13,9 @@ class AddReplyCommentUseCase {
     this._authenticationTokenManager = authenticationTokenManager;
   }
 
-  async execute(useCasePayload, useCaseAuthentication, useCaseParams) {
-    const newReplyComment = new NewReplyComment(
-      useCasePayload,
-      useCaseParams,
-      useCaseAuthentication
-    );
-    const accessToken = newReplyComment.authentication;
-
-    const { id } = await this._authenticationTokenManager.decodePayload(
-      accessToken
-    );
+  async execute(useCasePayload, useCaseParams, useCaseAuthentication) {
+    const newReplyComment = new NewReplyComment(useCasePayload, useCaseParams);
+    const { id: credentialId } = useCaseAuthentication;
 
     await this._threadRepository.verifyAvailableThread(
       newReplyComment.threadId
@@ -32,7 +24,10 @@ class AddReplyCommentUseCase {
       newReplyComment.commentId
     );
 
-    return this._replyCommentRepository.addReplyComment(newReplyComment, id);
+    return this._replyCommentRepository.addReplyComment(
+      newReplyComment,
+      credentialId
+    );
   }
 }
 

@@ -7,14 +7,10 @@ class AddedThreadUseCase {
   }
 
   async execute(useCasePayload, useCaseAuthentication) {
-    const newThread = new NewThread(useCasePayload, useCaseAuthentication);
-    const accessToken = newThread.authentication;
+    const newThread = new NewThread(useCasePayload);
+    const { id: credentialId } = useCaseAuthentication;
 
-    const { id } = await this._authenticationTokenManager.decodePayload(
-      accessToken
-    );
-
-    return this._threadRepository.addThread(newThread, id);
+    return this._threadRepository.addThread(newThread, credentialId);
   }
 }
 

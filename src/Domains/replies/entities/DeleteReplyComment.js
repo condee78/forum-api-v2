@@ -1,19 +1,13 @@
 class DeleteReplyComment {
-  constructor(params, authentication) {
+  constructor(params) {
     this._isNullParams(params);
     this._verifyParams(params);
-    this._verifyAuthentication(authentication);
-    this._verifyBearerAuthentication(authentication);
 
     const { threadId, commentId, replyId } = params;
 
     this.threadId = threadId;
     this.commentId = commentId;
     this.replyId = replyId;
-
-    this.authentication = authentication.includes("Bearer")
-      ? authentication.replace("Bearer ", "")
-      : "";
   }
 
   _isNullParams(params) {
@@ -33,18 +27,6 @@ class DeleteReplyComment {
       typeof replyId !== "string"
     ) {
       throw new Error("DELETE_REPLY_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION");
-    }
-  }
-
-  _verifyAuthentication(authentication) {
-    if (authentication == null) {
-      throw new Error("DELETE_REPLY_COMMENT.NOT_CONTAIN_ANY_AUTHENTICATION");
-    }
-  }
-
-  _verifyBearerAuthentication(authentication) {
-    if (!authentication.includes("Bearer")) {
-      throw new Error("DELETE_REPLY_COMMENT.NOT_CONTAIN_BEARER_AUTHENTICATION");
     }
   }
 }

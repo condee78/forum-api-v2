@@ -11,22 +11,15 @@ class DeleteCommentUseCase {
     this._authenticationTokenManager = authenticationTokenManager;
   }
 
-  async execute(useCaseAuthentication, useCaseParams) {
-    const deleteComment = new DeleteComment(
-      useCaseParams,
-      useCaseAuthentication
-    );
-    const accessToken = deleteComment.authentication;
-
-    const { id } = await this._authenticationTokenManager.decodePayload(
-      accessToken
-    );
+  async execute(useCaseParams, useCaseAuthentication) {
+    const deleteComment = new DeleteComment(useCaseParams);
+    const { id: credentialId } = useCaseAuthentication;
 
     await this._threadRepository.verifyAvailableThread(deleteComment.threadId);
 
     await this._commentRepository.verifyCommentOwner(
       deleteComment.commentId,
-      id
+      credentialId
     );
 
     return this._commentRepository.deleteComment(deleteComment.commentId);

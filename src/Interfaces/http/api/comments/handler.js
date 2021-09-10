@@ -8,10 +8,11 @@ class CommentsHandler {
   }
 
   async postCommentHandler(request, h) {
+    // const { id: credentialId } = request.auth.credentials;
     const addedComment = await this._addCommentUseCase.execute(
       request.payload,
-      request.headers.authorization,
-      request.params
+      request.params,
+      request.auth.credentials
     );
 
     const response = h.response({
@@ -25,9 +26,10 @@ class CommentsHandler {
   }
 
   async deleteCommentHandler(request, h) {
+    // const { id: credentialId } = request.auth.credentials;
     await this._deleteCommentUseCase.execute(
-      request.headers.authorization,
-      request.params
+      request.params,
+      request.auth.credentials
     );
 
     const response = h.response({

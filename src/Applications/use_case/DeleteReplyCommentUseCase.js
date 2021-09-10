@@ -13,16 +13,9 @@ class DeleteReplyCommentUseCase {
     this._authenticationTokenManager = authenticationTokenManager;
   }
 
-  async execute(useCaseAuthentication, useCaseParams) {
-    const deleteReplyComment = new DeleteReplyComment(
-      useCaseParams,
-      useCaseAuthentication
-    );
-    const accessToken = deleteReplyComment.authentication;
-
-    const { id } = await this._authenticationTokenManager.decodePayload(
-      accessToken
-    );
+  async execute(useCaseParams, useCaseAuthentication) {
+    const deleteReplyComment = new DeleteReplyComment(useCaseParams);
+    const { id: credentialId } = useCaseAuthentication;
 
     await this._threadRepository.verifyAvailableThread(
       deleteReplyComment.threadId
@@ -33,7 +26,7 @@ class DeleteReplyCommentUseCase {
 
     await this._replyCommentRepository.verifyReplyCommentOwner(
       deleteReplyComment.replyId,
-      id
+      credentialId
     );
 
     return this._replyCommentRepository.deleteReplyComment(

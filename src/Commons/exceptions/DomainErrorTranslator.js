@@ -35,20 +35,11 @@ DomainErrorTranslator._directories = {
     new InvariantError("harus mengirimkan token refresh"),
   "DELETE_AUTHENTICATION_USE_CASE.PAYLOAD_NOT_MEET_DATA_TYPE_SPECIFICATION":
     new InvariantError("refresh token harus string"),
-  "NEW_THREAD.NOT_CONTAIN_ANY_PROPERTY": new AuthenticationError(
-    "Missing authentication"
-  ),
   "NEW_THREAD.NOT_CONTAIN_NEEDED_PROPERTY": new InvariantError(
     "harus mengirimkan title dan body"
   ),
   "NEW_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION": new InvariantError(
     "title dan body harus string"
-  ),
-  "NEW_THREAD.NOT_CONTAIN_ANY_AUTHENTICATION": new AuthenticationError(
-    "Missing authentication"
-  ),
-  "NEW_THREAD.NOT_CONTAIN_BEARER_AUTHENTICATION": new AuthenticationError(
-    "Missing bearer authentication"
   ),
   "NEW_COMMENT.NOT_CONTAIN_ANY_PROPERTY": new InvariantError(
     "tidak dapat membuat comment baru karena properti yang dibutuhkan tidak ada"
@@ -68,26 +59,11 @@ DomainErrorTranslator._directories = {
   "NEW_COMMENT.PARAMS_NOT_MEET_DATA_TYPE_SPECIFICATION": new InvariantError(
     "Parameter Thread ID harus string"
   ),
-  "NEW_COMMENT.NOT_CONTAIN_ANY_AUTHENTICATION": new AuthenticationError(
-    "Missing authentication"
-  ),
-  "NEW_COMMENT.NOT_CONTAIN_BEARER_AUTHENTICATION": new AuthenticationError(
-    "Missing bearer authentication"
-  ),
   "DELETE_COMMENT.NOT_CONTAIN_NEEDED_PROPERTY": new InvariantError(
     "harus mengirimkan thread ID dan comment ID"
   ),
   "DELETE_COMMENT.NOT_MEET_DATA_TYPE_SPECIFICATION": new InvariantError(
     "Thread ID dan Comment ID harus string"
-  ),
-  "DELETE_COMMENT.NOT_CONTAIN_ANY_AUTHENTICATION": new AuthenticationError(
-    "Missing authentication"
-  ),
-  "DELETE_COMMENT.NOT_CONTAIN_ANY_PROPERTY": new AuthenticationError(
-    "Missing authentication"
-  ),
-  "DELETE_COMMENT.NOT_CONTAIN_BEARER_AUTHENTICATION": new AuthenticationError(
-    "Missing bearer authentication"
   ),
   "NEW_REPLY_COMMENT.NOT_CONTAIN_ANY_PROPERTY": new InvariantError(
     "tidak dapat membalas comment baru karena properti yang dibutuhkan tidak ada"
@@ -106,11 +82,6 @@ DomainErrorTranslator._directories = {
   ),
   "NEW_REPLY_COMMENT.PARAMS_NOT_MEET_DATA_TYPE_SPECIFICATION":
     new InvariantError("Parameter Thread ID dan Comment ID harus string"),
-  "NEW_REPLY_COMMENT.NOT_CONTAIN_ANY_AUTHENTICATION": new AuthenticationError(
-    "Missing authentication"
-  ),
-  "NEW_REPLY_COMMENT.NOT_CONTAIN_BEARER_AUTHENTICATION":
-    new AuthenticationError("Missing bearer authentication"),
 };
 
 module.exports = DomainErrorTranslator;

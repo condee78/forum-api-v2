@@ -9,10 +9,11 @@ class RepliesHandler {
   }
 
   async postReplyCommentHandler(request, h) {
+    // const { id: credentialId } = request.auth.credentials;
     const addedReply = await this._addReplyCommentUseCase.execute(
       request.payload,
-      request.headers.authorization,
-      request.params
+      request.params,
+      request.auth.credentials
     );
 
     const response = h.response({
@@ -26,9 +27,10 @@ class RepliesHandler {
   }
 
   async deleteReplyCommentByIdHandler(request, h) {
+    // const { id: credentialId } = request.auth.credentials;
     await this._deleteReplyCommentUseCase.execute(
-      request.headers.authorization,
-      request.params
+      request.params,
+      request.auth.credentials
     );
 
     const response = h.response({
