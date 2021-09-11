@@ -22,12 +22,6 @@ const LoginUserUseCase = require("../Applications/use_case/LoginUserUseCase");
 const RefreshAuthenticationUseCase = require("../Applications/use_case/RefreshAuthenticationUseCase");
 const LogoutUserUseCase = require("../Applications/use_case/LogoutUserUseCase");
 
-const AddThreadUseCase = require("../Applications/use_case/AddThreadUseCase");
-const DetailThreadUseCase = require("../Applications/use_case/DetailThreadUseCase");
-const AddCommentUseCase = require("../Applications/use_case/AddCommentUseCase");
-const DeleteCommentUseCase = require("../Applications/use_case/DeleteCommentUseCase");
-const AddReplyCommentUseCase = require("../Applications/use_case/AddReplyCommentUseCase");
-const DeleteReplyCommentUseCase = require("../Applications/use_case/DeleteReplyCommentUseCase");
 const ThreadUseCase = require("../Applications/use_case/ThreadUseCase");
 const CommentUseCase = require("../Applications/use_case/CommentUseCase");
 const ReplyCommentUseCase = require("../Applications/use_case/ReplyCommentUseCase");
@@ -47,16 +41,6 @@ const useCaseInstanceContainer = {
     userRepository: serviceInstanceContainer.userRepository,
     encryptionHelper: serviceInstanceContainer.encryptionHelper,
   }),
-  addThreadUseCase: new AddThreadUseCase({
-    threadRepository: serviceInstanceContainer.threadRepository,
-    authenticationTokenManager:
-      serviceInstanceContainer.authenticationTokenManager,
-  }),
-  detailThreadUseCase: new DetailThreadUseCase({
-    threadRepository: serviceInstanceContainer.threadRepository,
-    commentRepository: serviceInstanceContainer.commentRepository,
-    replyCommentRepository: serviceInstanceContainer.replyCommentRepository,
-  }),
   threadUseCase: new ThreadUseCase({
     threadRepository: serviceInstanceContainer.threadRepository,
     commentRepository: serviceInstanceContainer.commentRepository,
@@ -69,32 +53,6 @@ const useCaseInstanceContainer = {
       serviceInstanceContainer.authenticationTokenManager,
   }),
   replyCommentUseCase: new ReplyCommentUseCase({
-    commentRepository: serviceInstanceContainer.commentRepository,
-    threadRepository: serviceInstanceContainer.threadRepository,
-    replyCommentRepository: serviceInstanceContainer.replyCommentRepository,
-    authenticationTokenManager:
-      serviceInstanceContainer.authenticationTokenManager,
-  }),
-  addCommentUseCase: new AddCommentUseCase({
-    commentRepository: serviceInstanceContainer.commentRepository,
-    threadRepository: serviceInstanceContainer.threadRepository,
-    authenticationTokenManager:
-      serviceInstanceContainer.authenticationTokenManager,
-  }),
-  deleteCommentUseCase: new DeleteCommentUseCase({
-    commentRepository: serviceInstanceContainer.commentRepository,
-    threadRepository: serviceInstanceContainer.threadRepository,
-    authenticationTokenManager:
-      serviceInstanceContainer.authenticationTokenManager,
-  }),
-  addReplyCommentUseCase: new AddReplyCommentUseCase({
-    commentRepository: serviceInstanceContainer.commentRepository,
-    threadRepository: serviceInstanceContainer.threadRepository,
-    replyCommentRepository: serviceInstanceContainer.replyCommentRepository,
-    authenticationTokenManager:
-      serviceInstanceContainer.authenticationTokenManager,
-  }),
-  deleteReplyCommentUseCase: new DeleteReplyCommentUseCase({
     commentRepository: serviceInstanceContainer.commentRepository,
     threadRepository: serviceInstanceContainer.threadRepository,
     replyCommentRepository: serviceInstanceContainer.replyCommentRepository,
