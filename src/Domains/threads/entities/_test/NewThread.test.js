@@ -23,6 +23,19 @@ describe("a NewThread entities", () => {
     );
   });
 
+  it("should throw error when payload not meet data type specification", () => {
+    // Arrange
+    const payload = {
+      title: 123,
+      body: 123,
+    };
+
+    // Action & Assert
+    expect(() => new NewThread(payload)).toThrowError(
+      "NEW_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION"
+    );
+  });
+
   it("should create newThread object correctly", () => {
     // Arrange
     const payload = {

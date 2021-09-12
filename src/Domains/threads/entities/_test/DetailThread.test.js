@@ -21,10 +21,22 @@ describe("a DetailThread entities", () => {
     );
   });
 
+  it("should throw error when payload not meet data type specification", () => {
+    // Arrange
+    const params = {
+      threadId: 123,
+    };
+
+    // Action & Assert
+    expect(() => new DetailThread(params)).toThrowError(
+      "DETAIL_THREAD.NOT_MEET_DATA_TYPE_SPECIFICATION"
+    );
+  });
+
   it("should create DetailThread object correctly", () => {
     // Arrange
     const params = {
-      threadId: "thread-1",
+      threadId: "thread-123",
     };
 
     // Action
